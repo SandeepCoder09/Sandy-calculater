@@ -48,6 +48,9 @@ button:hover {
   background: #dc3545;
 }
 
-footer {
+.footer {
+  background-color: gray;
+  color: black;
+  text-align: center;
   
 }
