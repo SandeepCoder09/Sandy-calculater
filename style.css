@@ -121,6 +121,7 @@ button:active {
 
 /* Equal Button (Spanning 3 columns) */
 .equal {
+  width: 99vw;
   grid-column: span 3;
   background: linear-gradient(145deg, #00ff87, #60efff);
   color: #000;
