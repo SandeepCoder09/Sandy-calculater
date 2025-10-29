@@ -13,7 +13,7 @@
       <input type="checkbox" id="themeSwitch" />
       <label for="themeSwitch" class="switch">
         <span class="sun">☀️</span>
-        <span class="moon">🌑</span>
+        <span class="moon">🌙</span>
       </label>
     </div>
 
@@ -39,12 +39,12 @@
         <button onclick="append('.')">.</button>
         <button onclick="clearDisplay()" class="clear">Clear</button>
         <button class="operator" onclick="append('+')">+</button>
+
+        <button class="backspace-btn" onclick="backspace()">⌫</button>
+        <button class="equal" onclick="calculate()">=</button>
       </div>
     </div>
   </div>
-
-  <!-- Floating Backspace Button -->
-  <button class="backspace" onclick="backspace()">⌫</button>
 
   <footer>
     <div class="footer">
