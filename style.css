@@ -1,56 +1,188 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
+/* Wrapper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.switch {
+  width: 60px;
+  height: 30px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.switch span {
+  font-size: 16px;
+}
+
+#themeSwitch {
+  display: none;
+}
+
+/* Calculator */
 .calculator {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
 }
 
+.calculator:hover {
+  transform: scale(1.03);
+}
+
+/* Display */
 input[type="text"] {
   width: 100%;
-  height: 40px;
-  font-size: 1.2em;
-  margin-bottom: 10px;
+  height: 60px;
+  font-size: 1.5em;
+  margin-bottom: 15px;
   text-align: right;
-  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+  outline: none;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Buttons */
 .buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 80px);
+  gap: 12px;
+  justify-content: center;
 }
 
 button {
-  padding: 15px;
-  font-size: 1em;
+  padding: 18px;
+  font-size: 1.2em;
   border: none;
-  background: #007BFF;
-  color: white;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
+  color: white;
+  background: linear-gradient(145deg, #007BFF, #0056b3);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-  background: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
 }
 
+/* Operators */
+.operator {
+  background: linear-gradient(145deg, #ff8a00, #e52e71);
+}
+
+/* Equal Button */
+.equal {
+  background: linear-gradient(145deg, #00c6ff, #0072ff);
+  animation: glow 2s infinite alternate;
+}
+
+/* Clear Button */
 .clear {
   grid-column: span 4;
-  background: #dc3545;
+  background: linear-gradient(145deg, #ff416c, #ff4b2b);
 }
 
+/* Glow Animation */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #00c6ff, 0 0 20px #0072ff;
+  }
+  to {
+    box-shadow: 0 0 20px #0072ff, 0 0 40px #00c6ff;
+  }
+}
+
+/* Footer */
 .footer {
-  background-color: gray;
-  color: black;
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
   text-align: center;
-  
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.9em;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: color 0.3s ease;
+}
+
+/* Dark Mode Styles */
+body.dark {
+  background: linear-gradient(135deg, #141E30, #243B55);
+  color: #fff;
+}
+
+body.dark .calculator {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+
+body.dark input[type="text"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body.dark .footer {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+}
+
+body.dark .switch {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .buttons {
+    grid-template-columns: repeat(4, 65px);
+    gap: 8px;
+  }
+  button {
+    padding: 14px;
+    font-size: 1em;
+  }
+  input[type="text"] {
+    height: 50px;
+    font-size: 1.2em;
+  }
 }
