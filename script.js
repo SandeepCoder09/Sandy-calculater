@@ -8,18 +8,14 @@ function append(value) {
   setTimeout(() => display.classList.remove('typing'), 200);
 }
 
-// Calculate result
-function calculate() {
-  try {
-    display.value = eval(display.value);
-  } catch {
-    display.value = 'Error';
-  }
-}
-
 // Clear display
 function clearDisplay() {
   display.value = '';
+}
+
+// Backspace (delete last character)
+function backspace() {
+  display.value = display.value.slice(0, -1);
 }
 
 // Theme toggle
