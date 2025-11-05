@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculator | Made By Sandy</title>
+  <title>Hacker Calculator | Made by Sandy</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="description" content="Futuristic hacker-style calculator built by Sandy using HTML, CSS & JavaScript." />
 </head>
 <body>
+  <!-- Boot Intro -->
+  <div class="boot-screen" id="boot">
+    <pre class="boot-text">
+Initializing system...
+Loading Calculator Core...
+Injecting Binary Matrix...
+System Ready ✅
+Press any key to continue...
+    </pre>
+  </div>
+
   <div class="binary-bg"></div>
 
-  <div class="wrapper">
+  <div class="wrapper hidden" id="main">
     <!-- Theme Toggle -->
     <div class="theme-toggle">
       <input type="checkbox" id="themeSwitch" />
@@ -39,11 +52,22 @@
 
         <button onclick="append('0')">0</button>
         <button onclick="append('.')">.</button>
-        <button class="clear" onclick="clearDisplay()">C</button>
         <button class="operator" onclick="append('+')">+</button>
+        <button class="clear" onclick="clearDisplay()">C</button>
 
+        <button onclick="append('%')">%</button>
+        <button onclick="append('(')">(</button>
+        <button onclick="append(')')">)</button>
+        <button onclick="append('**2')">x²</button>
+
+        <button onclick="append('sqrt(')">√</button>
         <button class="backspace-btn" onclick="backspace()">⌫</button>
         <button class="equal" onclick="calculate()">=</button>
+      </div>
+
+      <div class="history">
+        <h3>History</h3>
+        <ul id="historyList"></ul>
       </div>
     </div>
   </div>
@@ -54,6 +78,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
