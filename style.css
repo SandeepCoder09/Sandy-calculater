@@ -1,4 +1,5 @@
-/* === Global Reset === */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +7,6 @@
   font-family: "Share Tech Mono", monospace;
 }
 
-/* === Body & Wrapper === */
 body {
   height: 100vh;
   background: #000;
@@ -18,7 +18,7 @@ body {
   align-items: center;
 }
 
-/* Animated Binary Background */
+/* === Animated Binary Background === */
 .binary-bg {
   position: fixed;
   top: 0;
@@ -36,25 +36,20 @@ body {
 }
 
 @keyframes binaryRain {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(100%);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
 }
 
 /* === Calculator Box === */
 .calculator {
   position: relative;
   z-index: 2;
-  background: rgba(0, 20, 0, 0.8);
+  background: rgba(0, 20, 0, 0.9);
   border: 2px solid #00ff99;
   border-radius: 16px;
-  box-shadow: 0 0 25px #00ff99, inset 0 0 15px #00ff99;
+  box-shadow: 0 0 25px #00ff99;
   padding: 20px;
-  width: 300px;
-  text-align: center;
+  width: 320px;
 }
 
 /* === Display === */
@@ -72,7 +67,7 @@ body {
   outline: none;
 }
 
-/* === Buttons === */
+/* === Buttons Grid === */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -80,6 +75,7 @@ body {
   margin-top: 20px;
 }
 
+/* === Buttons === */
 button {
   background: #002a00;
   border: 1px solid #00ff99;
@@ -88,40 +84,39 @@ button {
   border-radius: 10px;
   padding: 12px;
   cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+  box-shadow: 0 0 8px rgba(0, 255, 153, 0.4);
 }
 
+/* No hover effects now */
 button:hover {
-  background: #00ff99;
-  color: #001a00;
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00ff99;
+  transform: none;
 }
 
+/* Operator Buttons */
 .operator {
   color: #00ffee;
 }
 
-.equal {
-  background: #00ff99;
-  color: #000;
-  font-weight: bold;
-}
-
-.equal:hover {
-  background: #00ffee;
-}
-
+/* Clear Button */
 .clear {
   color: #ff0055;
   border-color: #ff0055;
 }
 
-.clear:hover {
-  background: #ff0055;
+/* Equal Button — Full Width */
+.equal {
+  grid-column: span 2;
+  background: #00ff99;
   color: #000;
-  box-shadow: 0 0 20px #ff0055;
+  font-weight: bold;
+  border: none;
+  font-size: 1.4rem;
+}
+
+/* Backspace next to = */
+.backspace-btn {
+  grid-column: span 2;
+  color: #ffcc00;
 }
 
 /* === Theme Toggle === */
@@ -174,24 +169,40 @@ footer {
   text-shadow: 0 0 10px #ff0055;
 }
 
-/* === Dark Theme Mode === */
+/* === Dark Theme (Changed Colors for Visibility) === */
 body.dark {
-  background: radial-gradient(circle, #001100 10%, #000000 100%);
-  color: #00ffee;
+  background: radial-gradient(circle at top, #0a001a, #000010);
+  color: #00c8ff;
 }
 
 body.dark .calculator {
-  border-color: #00ffee;
-  box-shadow: 0 0 30px #00ffee, inset 0 0 10px #00ffee;
-}
-
-body.dark button {
-  border-color: #00ffee;
-  color: #00ffee;
+  border-color: #00c8ff;
+  background: rgba(0, 10, 20, 0.9);
+  box-shadow: 0 0 25px #00c8ff;
 }
 
 body.dark #display {
-  border-color: #00ffee;
-  color: #00ffee;
-  box-shadow: inset 0 0 10px #00ffee;
+  border-color: #00c8ff;
+  color: #00c8ff;
+  box-shadow: inset 0 0 10px #00c8ff;
+}
+
+body.dark button {
+  background: #001a33;
+  border-color: #00c8ff;
+  color: #00c8ff;
+}
+
+body.dark .operator {
+  color: #00ffaa;
+}
+
+body.dark .clear {
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+}
+
+body.dark .equal {
+  background: #00c8ff;
+  color: #000;
 }
