@@ -1,84 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hacker Calculator | Made by Sandy</title>
+  <title>Sandy Calculator</title>
+  <meta name="description" content="A clean, minimal black and white calculator built by Sandy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <meta name="description" content="Futuristic hacker-style calculator built by Sandy using HTML, CSS & JavaScript." />
 </head>
+
 <body>
-  <!-- Boot Intro -->
-  <div class="boot-screen" id="boot">
-    <pre class="boot-text">
-Initializing system...
-Loading Calculator Core...
-Injecting Binary Matrix...
-System Ready ✅
-Press any key to continue...
-    </pre>
-  </div>
 
-  <div class="binary-bg"></div>
+  <!-- App Shell -->
+  <div class="app" id="main">
 
-  <div class="wrapper hidden" id="main">
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
-      <input type="checkbox" id="themeSwitch" />
-      <label for="themeSwitch" class="switch">
-        <span class="sun">☀️</span>
-        <span class="moon">🌑</span>
-      </label>
-    </div>
-
-    <div class="calculator">
-      <input type="text" id="display" disabled placeholder="0" />
-      <div class="buttons">
-        <button onclick="append('7')">7</button>
-        <button onclick="append('8')">8</button>
-        <button onclick="append('9')">9</button>
-        <button class="operator" onclick="append('/')">÷</button>
-
-        <button onclick="append('4')">4</button>
-        <button onclick="append('5')">5</button>
-        <button onclick="append('6')">6</button>
-        <button class="operator" onclick="append('*')">×</button>
-
-        <button onclick="append('1')">1</button>
-        <button onclick="append('2')">2</button>
-        <button onclick="append('3')">3</button>
-        <button class="operator" onclick="append('-')">−</button>
-
-        <button onclick="append('0')">0</button>
-        <button onclick="append('.')">.</button>
-        <button class="operator" onclick="append('+')">+</button>
-        <button class="clear" onclick="clearDisplay()">C</button>
-
-        <button onclick="append('%')">%</button>
-        <button onclick="append('(')">(</button>
-        <button onclick="append(')')">)</button>
-        <button onclick="append('**2')">x²</button>
-
-        <button onclick="append('sqrt(')">√</button>
-        <button class="backspace-btn" onclick="backspace()">⌫</button>
-        <button class="equal" onclick="calculate()">=</button>
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <!-- Calculator SVG Icon -->
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8" />
+          <rect x="7" y="7" width="4" height="2" rx="1" fill="currentColor" />
+          <rect x="13" y="7" width="4" height="2" rx="1" fill="currentColor" />
+          <rect x="7" y="11" width="4" height="2" rx="1" fill="currentColor" />
+          <rect x="13" y="11" width="4" height="2" rx="1" fill="currentColor" />
+          <rect x="7" y="15" width="4" height="2" rx="1" fill="currentColor" />
+          <rect x="13" y="15" width="4" height="6" rx="1" fill="currentColor" />
+        </svg>
+        <span class="brand-name">Sandy<span>Calc</span></span>
       </div>
 
-      <div class="history">
-        <h3>History</h3>
-        <ul id="historyList"></ul>
-      </div>
-    </div>
-  </div>
+      <div class="header-controls">
+        <!-- Theme Toggle -->
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle dark/light theme" title="Toggle theme">
+          <!-- Sun icon (shown in dark mode) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8" />
+            <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="2" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="19" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="4.93" y1="4.93" x2="7.05" y2="7.05" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" />
+            <line x1="16.95" y1="16.95" x2="19.07" y2="19.07" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" />
+            <line x1="4.93" y1="19.07" x2="7.05" y2="16.95" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" />
+            <line x1="16.95" y1="7.05" x2="19.07" y2="4.93" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" />
+          </svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
 
-  <footer>
-    <div class="footer">
-      Made With <span class="heart">❤️</span> By <b>Sandy</b> | © 2025 Sandeep Coder
-    </div>
-  </footer>
+        <!-- History Toggle (mobile) -->
+        <button class="hist-toggle-btn" id="histToggleBtn" aria-label="Toggle history">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+            <polyline points="12 7 12 12 15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Calculator Card -->
+      <section class="calculator" aria-label="Calculator">
+
+        <!-- Display -->
+        <div class="display-wrap">
+          <div class="display-expr" id="expression" aria-hidden="true"></div>
+          <input type="text" id="display" class="display-input" disabled placeholder="0"
+            aria-label="Calculator display" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons" role="group" aria-label="Calculator buttons">
+
+          <!-- Row 1 -->
+          <button class="btn btn-clear" id="btn-C" onclick="clearDisplay()">C</button>
+          <button class="btn btn-special" id="btn-par-o" onclick="append('(')">(</button>
+          <button class="btn btn-special" id="btn-par-c" onclick="append(')')">)</button>
+          <button class="btn btn-operator" id="btn-div" onclick="append('/')">
+            <!-- Divide icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="7" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="17" r="1.5" fill="currentColor" />
+              <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Row 2 -->
+          <button class="btn btn-num" id="btn-7" onclick="append('7')">7</button>
+          <button class="btn btn-num" id="btn-8" onclick="append('8')">8</button>
+          <button class="btn btn-num" id="btn-9" onclick="append('9')">9</button>
+          <button class="btn btn-operator" id="btn-mul" onclick="append('*')">
+            <!-- Multiply icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Row 3 -->
+          <button class="btn btn-num" id="btn-4" onclick="append('4')">4</button>
+          <button class="btn btn-num" id="btn-5" onclick="append('5')">5</button>
+          <button class="btn btn-num" id="btn-6" onclick="append('6')">6</button>
+          <button class="btn btn-operator" id="btn-sub" onclick="append('-')">
+            <!-- Minus icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Row 4 -->
+          <button class="btn btn-num" id="btn-1" onclick="append('1')">1</button>
+          <button class="btn btn-num" id="btn-2" onclick="append('2')">2</button>
+          <button class="btn btn-num" id="btn-3" onclick="append('3')">3</button>
+          <button class="btn btn-operator" id="btn-add" onclick="append('+')">
+            <!-- Plus icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Row 5 -->
+          <button class="btn btn-num btn-zero" id="btn-0" onclick="append('0')">0</button>
+          <button class="btn btn-num" id="btn-dot" onclick="append('.')">.</button>
+          <button class="btn btn-backspace" id="btn-back" onclick="backspace()" aria-label="Backspace">
+            <!-- Backspace icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 6H8l-7 6 7 6h13a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z" stroke="currentColor" stroke-width="1.8"
+                stroke-linejoin="round" />
+              <line x1="18" y1="9" x2="12" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <line x1="12" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <!-- Row 6: Advanced -->
+          <button class="btn btn-special" id="btn-pct" onclick="append('%')">%</button>
+          <button class="btn btn-special" id="btn-sq" onclick="append('**2')">x²</button>
+          <button class="btn btn-special" id="btn-sqrt" onclick="append('sqrt(')">
+            <!-- Square root icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="3 12 7 19 11 5 15 15 17 11 21 11" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <!-- Equals -->
+          <button class="btn btn-equal" id="btn-eq" onclick="calculate()" aria-label="Calculate">
+            <!-- Equals icon -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="9" x2="19" y2="9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              <line x1="5" y1="15" x2="19" y2="15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+            </svg>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- History Panel -->
+      <aside class="history-panel" id="historyPanel" aria-label="Calculation history">
+        <div class="history-header">
+          <h2 class="history-title">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+              <polyline points="12 7 12 12 15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            History
+          </h2>
+          <button class="hist-clear-btn" id="clearHistBtn" onclick="clearHistory()" aria-label="Clear history">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M9 6V4h6v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Clear
+          </button>
+        </div>
+        <ul class="history-list" id="historyList" aria-live="polite">
+          <li class="history-empty">No calculations yet.</li>
+        </ul>
+      </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      Made with
+      <svg class="footer-heart" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      by <strong>Sandy</strong> &bull; &copy; 2025 Sandy Coder
+    </footer>
+
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
